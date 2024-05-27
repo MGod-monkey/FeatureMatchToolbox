@@ -1,0 +1,14 @@
+pyyaml
+imutils
+flask
+numpy
+tqdm>=4.36.0
+matplotlib
+plotly
+scipy
+h5py
+kornia>=0.6.7
+gdown
+opencv-python
+opencv-contrib-python
+pyside6
