@@ -2,8 +2,8 @@ from pathlib import Path
 import cv2
 import matplotlib.cm as cm
 import torch
-from . models.matching import Matching
-from . models.utils import (AverageTimer, VideoStreamer,
+from . SuperGluePretrainedNetwork.models.matching import Matching
+from . SuperGluePretrainedNetwork.models.utils import (AverageTimer, VideoStreamer,
                           make_matching_plot_fast, frame2tensor,compute_pose_error, compute_epipolar_error,
                           estimate_pose, make_matching_plot,
                           error_colormap, AverageTimer, pose_auc, read_image,
@@ -47,31 +47,31 @@ def videoMatch(local_image_path=None, camera_index='0', resize = (640, 480), sho
     }
     matching = Matching(config).eval().to(device)
     keys = ['keypoints', 'scores', 'descriptors']
-    # if camera_index == '0':
-    #     # vs = cv2.VideoCapture(int(camera_index))
-    #     # if vs.isOpened():
-    #     #     vs = cv2.VideoCapture(0)
-    #     vs = VideoStreamer(camera_index, resize, 1,
-    #                     ['*.png', '*.jpg', '*.jpeg'], 1000000)
-    #     local_image, ret = vs.next_frame()
-    #     if not ret:
-    #         vs = VideoStreamer('0', resize, 1,
-    #                         ['*.png', '*.jpg', '*.jpeg'], 1000000)
-    # else:
-    #     # vs = cv2.VideoCapture(f'http://{camera_index}:8080/video_feed/0?width=640&height=480&quality=90')
-    #     # if vs.isOpened():
-    #     #     vs = cv2.VideoCapture(0)
-    #     vs = VideoStreamer(f'http://{camera_index}:8080/video_feed/2', 1,
-    #                     ['*.png', '*.jpg', '*.jpeg'], 1000000)
-    # 如果没有传入图片则默认以第一帧为参考帧
-    # if local_image_path is None:
-    #     local_image, ret = vs.next_frame()
-    #     # ret, local_image = vs.read()
-    #     assert ret, 'ERROR：读取摄像头错误！！'
-    # else:
-    local_image = cv2.imread(r'C:\Users\17814\Desktop\Qt_Ui\modules\SuperGluePretrainedNetwork\test.jpg')
-    local_image = cv2.resize(local_image, resize, interpolation=cv2.INTER_AREA)
-    local_image = cv2.cvtColor(local_image, cv2.COLOR_RGB2GRAY)
+    if camera_index == '0':
+        # vs = cv2.VideoCapture(int(camera_index))
+        # if vs.isOpened():
+        #     vs = cv2.VideoCapture(0)
+        vs = VideoStreamer(camera_index, resize, 1,
+                        ['*.png', '*.jpg', '*.jpeg'], 1000000)
+        local_image, ret = vs.next_frame()
+        if not ret:
+            vs = VideoStreamer('0', resize, 1,
+                            ['*.png', '*.jpg', '*.jpeg'], 1000000)
+    else:
+        # vs = cv2.VideoCapture(f'http://{camera_index}:8080/video_feed/0?width=640&height=480&quality=90')
+        # if vs.isOpened():
+        #     vs = cv2.VideoCapture(0)
+        vs = VideoStreamer(f'http://{camera_index}:8080/video_feed/2', 1,
+                        ['*.png', '*.jpg', '*.jpeg'], 1000000)
+    如果没有传入图片则默认以第一帧为参考帧
+    if local_image_path is None:
+        local_image, ret = vs.next_frame()
+        # ret, local_image = vs.read()
+        assert ret, 'ERROR：读取摄像头错误！！'
+    else:
+        local_image = cv2.imread(r''.format(local_image_path))
+        local_image = cv2.resize(local_image, resize, interpolation=cv2.INTER_AREA)
+        local_image = cv2.cvtColor(local_image, cv2.COLOR_RGB2GRAY)
     # 转换为张量
     frame_tensor = frame2tensor(local_image, device)
     last_data = matching.superpoint({'image': frame_tensor})

@@ -1,6 +1,6 @@
 ## 题目：基于图像特征点的视觉定位系统
 
-
+![](assets/main_interface.png)
 
 ### 题目内容
 

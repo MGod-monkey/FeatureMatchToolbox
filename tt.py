@@ -410,6 +410,6 @@
 #         camera_right.release()
         
 # biaoding(9, 6, 50, 23.3)
-from modules.SuperGluePretrainedNetwork.SuperGlueApi import *
+from modules.SuperGlueApi import *
 
 videoMatch()

@@ -16,7 +16,7 @@ import yaml
 from imutils.video import VideoStream
 import time
 from . SuperGluePretrainedNetwork.models.utils import AverageTimer, VideoStreamer
-from . SuperGluePretrainedNetwork.SuperGlueApi import *
+from . SuperGlueApi import *
 # from models.matching import Matching
 # from models.utils import (AverageTimer, VideoStreamer,
 #                           make_matching_plot_fast, frame2tensor)

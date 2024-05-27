@@ -26,6 +26,6 @@ from . ui_functions import *
 
 from . app_camera import *
 
-from . SuperGluePretrainedNetwork.SuperGlueApi import *
+from . SuperGlueApi import *
 
 from . rasp_ups import *
