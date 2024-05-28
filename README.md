@@ -9,26 +9,32 @@
 - 3.通过算法计算出局部图片相对于全局图片的水平偏移角以及垂直偏移角，误差不超过5%。
 - 4.通过算法计算局部图片和水平图片的直线距离，误差不超过5%
 
+> 文章可以参考`assets/毕业论文终稿匿名版.pdf`
+
 ### 环境搭建
 
-1. 安装Anaconda环境
-2. 安装依赖包（由于一些特征匹配算法在最新版opencv中受专利保护，因此安装的opencv版本为**3.4.1.15**）
+1. 克隆本项目
+    ```sh
+    git clone https://github.com/MGod-monkey/FeatureMatchToolbox.git --recurse-submodules
+    ```
+2. 安装Anaconda环境
+3. 创建虚拟环境并安装依赖包
 
 
-```sh
-conda create -n fpmatch python=3.6
+    ```sh
+    conda create -n fpmatch python=3.10
 
-conda activate fpmatch
+    conda activate fpmatch
 
-pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+    pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 安装cpu版本的PyTorch
-pip3 install torch torchvision
+    # 安装cpu版本的PyTorch
+    pip3 install torch torchvision
 
-# 安装cuda版本的PyTorch
-pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/cu111/torch_stable.html
-```
-
+    # 安装cuda版本的PyTorch
+    pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/cu111/torch_stable.html
+    ```
+    > 由于SUFT算法在最新版opencv中受专利保护，因此如果需要使用请搭建`python=3.6 opencv-python=3.4.1.15`的环境
 
 
 ### 运行
